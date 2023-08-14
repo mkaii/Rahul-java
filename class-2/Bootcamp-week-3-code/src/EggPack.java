@@ -1,17 +1,24 @@
-public class EggPack extends Item{
+public class EggPack extends CartItem{
 
-    private final int numberOfEggs;
+    private final int numEggsPerPack;
     private final String bestBeforeDate;
 
-    public EggPack(String name, String brand, double price, String description, int numberOfEggs, String bestBeforeDate) {
-        super(name, brand, price, description);
-        this.numberOfEggs = numberOfEggs;
+
+    public EggPack(String name, String brand, double price, String description, int numEggsPerPack, String bestBeforeDate) {
+        super(name, brand, price, description, Category.EGG);
+        this.numEggsPerPack = numEggsPerPack;
         this.bestBeforeDate = bestBeforeDate;
     }
 
-    public int getNumberOfEggs() {
+    public EggPack(String name, String brand, double price, String description, int numEggsPerPack, String bestBeforeDate, Integer countOfItem) {
+        super(name, brand, price, description, Category.EGG,countOfItem);
+        this.numEggsPerPack = numEggsPerPack;
+        this.bestBeforeDate = bestBeforeDate;
+    }
 
-        return numberOfEggs;
+    public int getNumEggsPerPack() {
+
+        return numEggsPerPack;
     }
 
     public String getBestBeforeDate() {
@@ -21,6 +28,9 @@ public class EggPack extends Item{
 
     @Override
     public String toString() {
-        return super.toString() + "\nNumber of eggs: " + numberOfEggs + "\nBest before: " + bestBeforeDate;
+        return super.toString() +
+                "\nnumEggsPerPack: " + numEggsPerPack +
+                "\nbestBeforeDate: " + bestBeforeDate ;
+
     }
 }

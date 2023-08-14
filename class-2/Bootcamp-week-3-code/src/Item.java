@@ -1,10 +1,11 @@
 public abstract class Item {
 
     // these are the attributes of the Item Class
-    private String name;
-    private String brand;
-    private double price;
-    private String description;
+    private final String name;
+    private final String brand;
+    private final double price;
+    private final String description;
+
 
     // Now using Constructor to initialize the attribute
     public Item(String name, String brand, double price, String description) {
@@ -13,6 +14,7 @@ public abstract class Item {
         this.price = price;
         this.description = description;
     }
+
     // using the getters ...
     public String getName() {
 
@@ -33,6 +35,8 @@ public abstract class Item {
 
         return description;
     }
+
+
 
     @Override
     // toString: display the attributes of the item

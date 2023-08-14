@@ -8,9 +8,6 @@ public class Application {
 
         // Calling the printStatus method
         supermarket.printStatus();
-        supermarket.createItems();
-        supermarket.displayItems();
-        supermarket.sayGoodbye();
     }
 
 }
