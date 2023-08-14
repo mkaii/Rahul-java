@@ -94,7 +94,7 @@ public class Supermarket {
 
     private void removeItemQuantity() {
 
-        System.out.println("Remove an Item to remove a quantity from :");
+        System.out.println("Select an Item to remove a quantity from :");
 
         //from a user perspective it should be 1 based indexing of shopping cart that's why minus 1 has been used.
         int indexInShoppingCart = Integer.parseInt(scanner.nextLine()) - 1;
@@ -130,6 +130,7 @@ public class Supermarket {
         boolean isPurchaseAllowed = mySingleUser.placeOrder();
 
         if(isPurchaseAllowed) {
+
             //remove bought items from the SuperMarket list
 
             for (int index = 0; index < mySingleUser.getMyCart().getCartItems().size(); index++) {
@@ -137,7 +138,12 @@ public class Supermarket {
 
                 for (CartItem shopItem : shopItemList) {
                     if (cartItem.getName().equals(shopItem.getName()) && cartItem.getBrand().equals(shopItem.getBrand()) && (cartItem.getPrice() == (shopItem.getPrice()))) {
-                        shopItem.remove1Item();
+
+                        int cartQuantity = cartItem.getItemCount();
+                        while(cartQuantity > 0) {
+                            shopItem.remove1Item();
+                            cartQuantity--;
+                        }
                         break;
                     }
                 }
