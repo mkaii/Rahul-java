@@ -3,7 +3,6 @@ public class EggPack extends CartItem{
     private final int numEggsPerPack;
     private final String bestBeforeDate;
 
-
     public EggPack(String name, String brand, double price, String description, int numEggsPerPack, String bestBeforeDate) {
         super(name, brand, price, description, Category.EGG);
         this.numEggsPerPack = numEggsPerPack;
@@ -17,12 +16,10 @@ public class EggPack extends CartItem{
     }
 
     public int getNumEggsPerPack() {
-
         return numEggsPerPack;
     }
 
     public String getBestBeforeDate() {
-
         return bestBeforeDate;
     }
 
