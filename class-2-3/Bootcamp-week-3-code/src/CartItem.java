@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class CartItem extends Item{
 
 
@@ -61,6 +64,16 @@ public class CartItem extends Item{
         {
             System.out.println("Cannot remove any more item");
         }
+    }
+
+    static List<Action> allowAbleActions()
+    {
+       List<Action> allowedActions = new ArrayList<>();
+        allowedActions.add(new AddCartItemAction());
+        allowedActions.add(new AddCartItemQuantityAction());
+        allowedActions.add(new RemoveCartItemQuantityAction());
+
+        return allowedActions;
     }
 
 

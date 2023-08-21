@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
 
     private double balance = 0;
@@ -109,5 +112,15 @@ public class User {
             return false;
         }
 
+    }
+
+
+    static List<Action> allowAbleActions()
+    {
+        List<Action> allowedActions = new ArrayList<>();
+        allowedActions.add(new AddUserBalanceAction());
+        allowedActions.add(new ConfirmUserPurchaseAction());
+
+        return allowedActions;
     }
 }

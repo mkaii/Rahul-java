@@ -35,7 +35,7 @@ public class Supermarket {
     }
 
     public void consoleMenu() {
-        int selection;
+       /* int selection;
 
         do {
             System.out.println("1) Add balance");
@@ -56,7 +56,32 @@ public class Supermarket {
                 case 6 -> displayShoppingCart();
                 case 7 -> confirmPurchase();
             }
-        } while (selection != 8);
+        } while (selection != 8);*/
+
+
+        List<Action> allowedActionsForConsole = new ArrayList<>();
+        allowedActionsForConsole.addAll(CartItem.allowAbleActions());
+        allowedActionsForConsole.addAll(User.allowAbleActions());
+        allowedActionsForConsole.addAll(ShoppingCart.allowAbleActions());
+        allowedActionsForConsole.addAll(Supermarket.allowAbleActions());
+
+        Menu myMenu = new Menu();
+        Action userAction;
+
+        do{
+            userAction  = myMenu.showMenu(allowedActionsForConsole);
+            if(userAction!=null) {
+                String userActionDesc = userAction.execute(mySingleUser, this);
+            }
+
+        }while (userAction != null);
+    }
+
+    static List<Action> allowAbleActions()
+    {
+        List<Action> allowedActions = new ArrayList<>();
+        allowedActions.add(new DisplaySHoppingListItemsAction());
+        return allowedActions;
     }
 
 

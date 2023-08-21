@@ -27,6 +27,7 @@ public class ShoppingCart {
 
     public void addCartItemToShoppingCart(CartItem item)
     {
+
         cartItems.add(item);
     }
 
@@ -34,6 +35,15 @@ public class ShoppingCart {
 
         cartItems.clear();
     }
+
+    static List<Action> allowAbleActions()
+    {
+        List<Action> allowedActions = new ArrayList<>();
+        allowedActions.add(new DisplaySHoppingCartItemsAction());
+
+        return allowedActions;
+    }
+
 
 
     //create to string to show all the items in the cart with quantity and total price
