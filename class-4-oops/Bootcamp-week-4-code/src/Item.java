@@ -3,7 +3,7 @@ public abstract class Item {
     // these are the attributes of the Item Class
     private final String name;
     private final String brand;
-    private final double price;
+    private double price;
     private final String description;
 
 
@@ -36,7 +36,9 @@ public abstract class Item {
         return description;
     }
 
-
+    public void setPrice(double price) {
+        this.price = price;
+    }
 
     @Override
     // toString: display the attributes of the item

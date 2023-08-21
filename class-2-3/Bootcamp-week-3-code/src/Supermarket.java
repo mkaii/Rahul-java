@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 public class Supermarket {
 
+
+
     // ArrayList of the items available in shop
     private final List<CartItem> shopItemList;
     User mySingleUser;
@@ -16,12 +18,24 @@ public class Supermarket {
         scanner = new Scanner(System.in);
     }
 
+    public List<CartItem> getShopItemList() {
+        return shopItemList;
+    }
+
+    static List<Action> allowAbleActions()
+    {
+        List<Action> allowedActions = new ArrayList<>();
+        allowedActions.add(new DisplaySHoppingListItemsAction());
+        return allowedActions;
+    }
 
 
     public void printStatus() {
         System.out.println("Welcome to FIT2099 Supermarket");
         createItems();
         consoleMenu();
+        System.out.println("---END---");
+        System.out.println("###################################");
         System.out.println("Thank you for visiting FIT2099 Supermarket!");
     }
     public void createItems() {
@@ -60,8 +74,9 @@ public class Supermarket {
 
 
         List<Action> allowedActionsForConsole = new ArrayList<>();
-        allowedActionsForConsole.addAll(CartItem.allowAbleActions());
         allowedActionsForConsole.addAll(User.allowAbleActions());
+        allowedActionsForConsole.addAll(CartItem.allowAbleActions());
+
         allowedActionsForConsole.addAll(ShoppingCart.allowAbleActions());
         allowedActionsForConsole.addAll(Supermarket.allowAbleActions());
 
@@ -72,115 +87,10 @@ public class Supermarket {
             userAction  = myMenu.showMenu(allowedActionsForConsole);
             if(userAction!=null) {
                 String userActionDesc = userAction.execute(mySingleUser, this);
+                System.out.println(userActionDesc);
             }
 
         }while (userAction != null);
-    }
-
-    static List<Action> allowAbleActions()
-    {
-        List<Action> allowedActions = new ArrayList<>();
-        allowedActions.add(new DisplaySHoppingListItemsAction());
-        return allowedActions;
-    }
-
-
-
-    private void addBalance() {
-
-        System.out.println("Enter a number to add to your current balance : ");
-        double amountToBeAdded = Double.parseDouble(scanner.nextLine());
-
-        mySingleUser.addBalance(amountToBeAdded);
-
-
-    }
-
-    private void addItem() {
-
-        System.out.println("Select an Item to add to your Shopping cart");
-
-        //from a user perspective it should be 1 based indexing that's why minus 1 has been used.
-        int indexInShoppingCart = Integer.parseInt(scanner.nextLine()) - 1;
-
-        mySingleUser.addItemToCart(shopItemList.get(indexInShoppingCart));
-
-    }
-
-    private void addItemQuantity() {
-
-        System.out.println("Select an Item to add a quantity to");
-
-        //from a user perspective it should be 1 based indexing of shopping list that's why minus 1 has been used.
-        int indexInShoppingItemList = Integer.parseInt(scanner.nextLine()) - 1;
-
-        mySingleUser.addItemToCart(shopItemList.get(indexInShoppingItemList));
-    }
-
-    private void removeItemQuantity() {
-
-        System.out.println("Select an Item to remove a quantity from :");
-
-        //from a user perspective it should be 1 based indexing of shopping cart that's why minus 1 has been used.
-        int indexInShoppingCart = Integer.parseInt(scanner.nextLine()) - 1;
-
-        mySingleUser.removeItemFromCart(indexInShoppingCart);
-
-    }
-
-    // Now displaying the items in the super-market in the ArrayList based on 1 based indexing....
-    public void displayItems() {
-        for (int i = 0; i < shopItemList.size(); i++) {
-            System.out.println("Item (" + (i + 1) + ")");
-            System.out.println(shopItemList.get(i).toString() + "\n");
-        }
-    }
-
-    private void displayShoppingCart() {
-
-        //print user balance
-        System.out.println("User balance: " + mySingleUser.getBalance());
-
-        //print user's shopping cart
-        for (int i = 0; i < mySingleUser.getMyCart().getCartItems().size(); i++) {
-            System.out.println("Item (" + (i + 1) + ")");
-            CartItem cartItem = mySingleUser.getMyCart().getCartItems().get(i);
-            System.out.println(cartItem.toString());
-        }
-    }
-
-
-    private void confirmPurchase() {
-
-        boolean isPurchaseAllowed = mySingleUser.placeOrder();
-
-        if(isPurchaseAllowed) {
-
-            //remove bought items from the SuperMarket list
-
-            for (int index = 0; index < mySingleUser.getMyCart().getCartItems().size(); index++) {
-                CartItem cartItem = mySingleUser.getMyCart().getCartItems().get(index);
-
-                for (CartItem shopItem : shopItemList) {
-                    if (cartItem.getName().equals(shopItem.getName()) && cartItem.getBrand().equals(shopItem.getBrand()) && (cartItem.getPrice() == (shopItem.getPrice()))) {
-
-                        int cartQuantity = cartItem.getItemCount();
-                        while(cartQuantity > 0) {
-                            shopItem.remove1Item();
-                            cartQuantity--;
-                        }
-                        break;
-                    }
-                }
-            }
-
-            //clear the Cart
-            mySingleUser.getMyCart().clear();
-        }
-        else
-        {
-            System.out.println("Not enough balance!!!");
-        }
     }
 
 

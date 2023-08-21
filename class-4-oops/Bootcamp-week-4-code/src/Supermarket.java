@@ -1,3 +1,6 @@
+import pricestrategy.IncreasedPriceStrategy;
+import pricestrategy.PriceStrategy;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -26,6 +29,7 @@ public class Supermarket {
     {
         List<Action> allowedActions = new ArrayList<>();
         allowedActions.add(new DisplaySHoppingListItemsAction());
+        allowedActions.add(new ModifyItemPriceAction());
         return allowedActions;
     }
 
@@ -94,6 +98,8 @@ public class Supermarket {
     }
 
 
-
-
+    public void applyPricingStrategy(PriceStrategy increasedPriceStrategy, int index, double percentage) {
+        CartItem item = shopItemList.get(index);
+        item.modifyPrice(increasedPriceStrategy,percentage);
+    }
 }

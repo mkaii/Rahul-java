@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Menu {
 
     Scanner scanner;
-    Map<Character,Action > actionMap ;
+    Map<Character, Action> actionMap ;
 
     public Menu() {
 
@@ -19,6 +19,7 @@ public class Menu {
         //e-> action-5
         //f-> action-6
         //g-> action-7
+        //h->new feature -increase price of an item
 
     }
 

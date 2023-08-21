@@ -1,3 +1,6 @@
+import pricestrategy.IncreasedPriceStrategy;
+import pricestrategy.PriceStrategy;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +11,8 @@ public class CartItem extends Item{
     private Integer itemCount;//default Integer value is anyway 0 only
     private Double  itemTotalPrice;
     private final Category itemCategory;
+
+    PriceStrategy priceStrategy;
 
 
     public CartItem(String name, String brand, double price, String description, Category itemCategory) {
@@ -90,4 +95,16 @@ public class CartItem extends Item{
                 "\nitemCategory: " + itemCategory;
 
     }
+
+    public void modifyPrice(PriceStrategy increasedPriceStrategy, double percentage) {
+
+        priceStrategy = increasedPriceStrategy;
+        double modifiedPrice = priceStrategy.getModifiedPrice(getPrice(),percentage);
+        setPrice(modifiedPrice);
+        itemTotalPrice = getPrice() * itemCount;
+
+
+    }
+
+
 }
